@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Title</title>
+  <meta charset="utf-8">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.10.0/prism.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.10.0/components/prism-javascript.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.10.0/themes/prism-solarizedlight.css" />
+  <style>
+    @import url(https://cdn.rawgit.com/tonsky/FiraCode/1.204/distr/fira_code.css);
+
+    body *  {
+      font-family: 'Fira Code' !important;
+    }
+
+    .remark-slide-content {
+      background: #073642;
+      color: #839496;
+    }
+
+    .big-code * {
+      font-size: 2.5rem;
+    }
+
+    .medium-code * {
+      font-size: 2rem;
+    }
+    .small-code * {
+      font-size: 1.5rem;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: 'Fira Code';
+      font-weight: normal;
+    }
+
+    .red {
+      color: red;
+    }
+
+    .blue {
+      color: blue;
+    }
+
+    a {
+      color: white !important;
+    }
+
+    @page {
+      size: 1210px 683px;
+      margin: 0;
+    }
+
+    @media print {
+      .remark-slide-scaler {
+        width: 100% !important;
+        height: 100% !important;
+        transform: scale(1) !important;
+        top: 0 !important;
+        left: 0 !important;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+  <textarea id="source">
+
+class: center, middle
+
+# Observables
+## 🔬
+
+---
+# What are observables?
+---
+count: false
+# What are observables?
+## An Alternative to async
+---
+count: false
+# What are observables?
+## An Alternative to async
+### .on(Callbacks)
+---
+count: false
+# What are observables?
+## An Alternative to async
+### .on(Callbacks)
+### .then(Promises)
+---
+
+# Uses
+---
+count: false
+# Uses
+### Http requests
+---
+count: false
+# Uses
+### Http requests
+### Websockets 🔌
+---
+count: false
+# Uses
+### Http requests
+### Websockets 🔌
+### User input ⌨️
+
+---
+count: false
+# Uses
+### Http requests
+### Websockets 🔌
+### User input ⌨️
+### Timeouts / intervals ⏰
+---
+count: false
+# Uses
+### Http requests
+### Websockets 🔌
+### User input ⌨️
+### Timeouts / intervals ⏰
+### Any other async ...
+---
+# Implementations
+### Rxjs https://github.com/ReactiveX/rxjs
+---
+count: false
+# Implementations
+### Rxjs https://github.com/ReactiveX/rxjs
+### Mostjs https://github.com/cujojs/most
+---
+count: false
+# Implementations
+### Rxjs https://github.com/ReactiveX/rxjs
+### Mostjs https://github.com/cujojs/most
+### xstream https://github.com/staltz/xstream
+---
+count: false
+# Implementations
+### Rxjs https://github.com/ReactiveX/rxjs
+### Mostjs https://github.com/cujojs/most
+### xstream https://github.com/staltz/xstream
+### Ecmascript proposal https://github.com/tc39/proposal-observable
+---
+# Used in
+### Angular 2+ ⦨
+---
+count:false
+# Used in
+### Angular 2+ ⦨
+### Cyclejs 🚲
+---
+
+# What is an Observable?
+---
+# What is an Observable?
+.big-code[```
++---(E)----(E)----(E)--|
+     ↑      ↑          ↑
+   Event  Event       End
+```]
+---
+# What is an Observable?
+.big-code[```
++---(E)
+```]
+---
+# What is an Observable?
+.big-code[```
++---(E)----(E)
+```]
+---
+# What is an Observable?
+.big-code[```
++---(E)----(E)----(E)
+```]
+---
+# What is an Observable?
+.big-code[```
++---(E)----(E)----(E)--|
+     ↑      ↑          ↑
+   Event  Event       End
+```]
+---
+# Example
+.big-code[
+```
+let $btn = $(“#button”)
+```]
+---
+count:false
+
+# Example
+.big-code[
+```
+let $btn = $(“#button”)
+
+let click$ =
+  Rx.Observable
+    .fromEvent($btn,
+               “mousedown”)
+
+```]
+---
+
+
+# Marble Diagram
+.big-code[```
++---(E)
+     ↑
+   click
+```]
+---
+count: false
+# Marble Diagram
+.big-code[```
++---(E)----(E)
+     ↑      ↑
+   click  click
+```]
+---
+count: false
+# Marble Diagram
+.big-code[```
++---(E)----(E)----(E)--#
+     ↑      ↑      ↑
+   click  click  click
+```]
+
+---
+# Example
+.big-code[```
+click$.subscribe( ()=>
+  /* makehttpcall */
+)
+```]
+
+---
+class: middle, center
+# That looks like a callback
+---
+class: middle, center
+# Yes, but...
+---
+class: middle, center
+# Cancelable
+---
+class: middle, center
+# Handles multiple events
+---
+class:center,middle
+# Observable Operators
+
+---
+# Observable Operators
+
+.big-code[```
+stream1$
+// +---e--e---e|
+```]
+
+---
+# Observable Operators
+
+.big-code[```
+stream1$
+// +---e--e---e|
+let stream2$ = stream1$.op()
+// +---e2-----e2|
+```]
+
+---
+
+
+# Array Fn
+* ### map
+* ### filter
+* ### reduce
+
+---
+# Observable fn
+* ### map
+* ### filter
+* ### reduce
+
+---
+# Observable fn
+* ### buffer
+* ### merge
+* ### flatten
+* ### concat
+
+---
+# Observable fn
+* ### bufferCount
+* ### mergeMap
+* ### flatMap
+* ### concatMap
+
+
+---
+# Array.map
+.big-code[```
+// A1 [1,2,3]
+map((e) => e + 1)
+// A2 [2,3,4]
+```]
+
+---
+# Observable.map
+.big-code[```
+// S1$ +---1--2---3|
+map((e) => e + 1)
+// S2$ +---2--3---4|
+```]
+---
+# Array.filter
+.big-code[```
+// A1 [1,2,3]
+filter((e) => e >= 2)
+// A2 [2,3]
+```]
+---
+# Observable.filter
+.big-code[```
+// S1$ +---1--2---3|
+filter((e) => e >= 2)
+// S2$ +------2---3|
+```]
+---
+# Array.reduce
+.big-code[```
+// A1 [1,2,3]
+reduce((a, b) =>  a + b, 0)
+// V1 6
+```]
+---
+
+# Observable.reduce
+.big-code[```
+// S1$ +---1--2---3|
+reduce((a, b) =>  a + b, 0)
+// S2$ +----------6|
+```]
+---
+# Example cont.
+
+.medium-code[```
+let rightClick$ =
+    click$.filter(e => e.which == 2)
+```]
+
+---
+count:false
+# Example cont.
+.medium-code[```
+let rightClick$ =
+    click$.filter(e => e.which == 2)
+
+rightClick$.subscribe(rightStuff)
+
+```]
+---
+# Example cont.
+
+.medium-code[```
+let leftClick$ =
+    click$.filter(e => e.which == 1)
+```]
+---
+count:false
+# Example cont.
+
+.medium-code[```
+let leftClick$ =
+    click$.filter(e => e.which == 1)
+
+leftClick$.subscribe(leftStuff)
+```]
+
+---
+# Example cont.
+
+.medium-code[```
+let rightClickCountUntilLeft$ =
+  rightClick$
+    .takeUntil(leftClick$)
+    .reduce((acc, _) => acc + 1, 0)
+```]
+---
+# Buffer
+.big-code[```
+// +---1--2---3|
+bufferCount(2)
+// +---[1,2]---[2,3]|
+```
+]
+
+---
+# Buffer
+.big-code[```
+// +---1--2---3|
+bufferTime(2)
+// +---[1,2]---[3]|
+```]
+
+---
+# Buffer
+.big-code[```
+// +---1--2---3|
+bufferTime(3000)
+// +---------[1,2,3]|
+```]
+
+---
+# Example cont.
+.medium-code[```
+let doubleClick$ =
+  click$
+    .bufferTime(30)
+```]
+
+---
+count:false
+# Example cont.
+.medium-code[```
+let doubleClick$ =
+  click$
+    .bufferTime(30)
+    .filter((e) => e.length == 2)
+```]
+
+---
+count:false
+# Example cont.
+.medium-code[```
+let doubleClick$ =
+  click$
+    .bufferTime(30)
+    .filter((e) => e.length == 2)
+    .map(createDoubleClickEvent)
+```]
+---
+count:false
+# Example cont.
+.medium-code[```
+let doubleClick$ =
+  click$
+    .bufferTime(30)
+    .filter((e) => e.length == 2)
+    .map(createDoubleClickEvent)
+doubleClick$.subscribe()
+```]
+---
+class: middle, center
+# Now a fun example...
+---
+
+.small-code[```
+const CODE = "38:38:40:40:37:39:37:39:66:65";
+```]
+
+---
+.small-code[```
+const CODE = "38:38:40:40:37:39:37:39:66:65";
+function onCallback(cb){
+ let input = '';
+```]
+
+---
+.small-code[```
+const CODE = "38:38:40:40:37:39:37:39:66:65";
+function onCallback(cb) => {
+ let input = '';
+ document.addEventListener('keydown', (e) => {
+```]
+
+---
+.small-code[```
+const CODE = "38:38:40:40:37:39:37:39:66:65";
+function onCallback(cb) => {
+ let input = '';
+ document.addEventListener('keydown', (e) => {
+  if(input == ''){
+    input = "" + e.keyCode;
+  } else {
+    input += (':' + e.keyCode);
+  }
+```]
+
+---
+.small-code[```
+const CODE = "38:38:40:40:37:39:37:39:66:65";
+function onCallback(cb) => {
+ let input = '';
+ document.addEventListener('keydown', (e) => {
+  if(input == ''){
+    input = "" + e.keyCode;
+  } else {
+    input += (':' + e.keyCode);
+  }
+  if (input === CODE){
+   return cb();
+  }
+```]
+
+---
+.small-code[```
+const CODE = "38:38:40:40:37:39:37:39:66:65";
+function onCallback(cb) => {
+ let input = '';
+ document.addEventListener('keydown', (e) => {
+  if(input == ''){
+    input = "" + e.keyCode;
+  } else {
+    input += (':' + e.keyCode);
+  }
+  if (input === CODE){
+   return cb();
+  }
+  if (!CODE.indexOf(input)) return;
+```]
+
+---
+.small-code[```
+const CODE = "38:38:40:40:37:39:37:39:66:65";
+function onCallback(cb) => {
+ let input = '';
+ document.addEventListener('keydown', (e) => {
+  if(input == ''){
+    input = "" + e.keyCode;
+  } else {
+    input += (':' + e.keyCode);
+  }
+  if (input === CODE){
+   return cb();
+  }
+  if (!CODE.indexOf(input)) return;
+  input = ("" + e.keyCode);
+ });
+}
+```]
+---
+class: middle, center
+.big-code[```
+onCallback(easterEgg)
+```]
+---
+# KONAMI CODE
+.big-code[```
+# UP UP DOWN DOWN
+  LEFT RIGHT LEFT RIGHT B A
+```]
+
+---
+# KONAMI CODE
+.medium-code[```
+  const UP = 38,
+        DOWN = 40,
+        B = 66,
+        A = 65,
+        LEFT = 37,
+        RIGHT = 39;
+```]
+
+---
+# KONAMI CODE
+.medium-code[```
+  const KONAMI_CODE =
+    [UP, UP, DOWN, DOWN, LEFT,
+     RIGHT, LEFT, RIGHT, B, A]
+     .join(":"),
+     LENGTH = KONAMI_CODE.length
+```]
+
+---
+# KONAMI CODE
+
+.medium-code[```
+KONAMI_CODE ==
+  "38:38:40:40:37:39:37:39:66:65"
+```]
+
+---
+class: center,middle
+# Lets's build a KONAMI$
+
+---
+count: false
+# KONAMI$
+
+.medium-code[```
+const KONAMI$ =
+  Rx.Observable
+    .fromEvent(document, 'keydown')
+```]
+---
+count: false
+# KONAMI$
+
+.medium-code[```
+const KONAMI$ =
+  Rx.Observable
+    .fromEvent(document, 'keydown')
+    .map((e) => e.keyCode)
+```]
+
+---
+count: false
+# KONAMI$
+
+.medium-code[```
+const KONAMI$ =
+  Rx.Observable
+    .fromEvent(document, 'keydown')
+    .map((e) => e.keyCode)
+    .bufferCount(LENGTH, 1)
+```]
+
+---
+count: false
+# KONAMI$
+
+.medium-code[```
+const KONAMI$ =
+  Rx.Observable
+    .fromEvent(document, 'keydown')
+    .map((e) => e.keyCode)
+    .bufferCount(LENGTH, 1)
+    .map((e) => e.join(":"))
+```]
+
+---
+# KONAMI$ Option 1
+
+.medium-code[```
+const KONAMI$ =
+  Rx.Observable
+    .fromEvent(document, 'keydown')
+    .map((e) => e.keyCode)
+    .bufferCount(LENGTH, 1)
+    .map((e) => e.join(":"))
+    .filter((e) => e == KONAMI_CODE)
+```]
+---
+count: false
+# KONAMI$ Option 1
+
+.medium-code[```
+const KONAMI$ =
+  Rx.Observable
+    .fromEvent(document, 'keydown')
+    .map((e) => e.keyCode)
+    .bufferCount(LENGTH, 1)
+    .map((e) => e.join(":"))
+    .filter((e) => e == KONAMI_CODE)
+    .mapTo(1)
+```]
+
+---
+# KONAMI$ Option 2
+
+.medium-code[```
+const KONAMI$ =
+  Rx.Observable
+    .fromEvent(document, 'keydown')
+    .map((e) => e.keyCode)
+    .bufferCount(LENGTH, 1)
+    .map((e) => e.join(":"))
+    .map((e) =>  e == KONAMI_CODE)
+```]
+
+---
+class:middle,center
+.big-code[```
+KONAMI$.subscribe(🗿🥚)
+```]
+
+---
+# Working Example
+
+## https://rxviz.com/v/5o16bgOV
+---
+# Choosing a lib
+* Rxjs
+
+  * +/-Loads of operators and functions.
+  * \+ Most commonly used
+
+---
+count: false
+# Choosing a lib
+* Rxjs
+  * +/-Loads of operators and functions.
+  * \+ Most commonly used
+
+* Mostjs
+  * ¯\_(ツ)_/¯
+
+---
+count: false
+# Choosing a lib
+* Rxjs
+  * +/-Loads of operators and functions.
+  * \+ Most commonly used
+
+* Mostjs
+  * ¯\_(ツ)_/¯
+
+* Xstream
+  * \+ Few operators,
+  * \- Only .red[hot] observables
+---
+# In Part 2
+* ## .red[Hot] v .blue[Cold] Operators
+* ## Combining operators
+* ## Conditional Operators
+
+---
+
+# Cool References
+* ## http://rxmarbles.com/
+* ## https://rxviz.com/
+
+---
+class: center, middle
+# End of Part 1
+    </textarea>
+  <script src="https://remarkjs.com/downloads/remark-latest.min.js">
+  </script>
+  <script>
+    var slideshow = remark.create();
+
+    document.getElementsByClassName("remark-code").forEach((e) => {
+      let data = e.children.map((e) => e.innerText).join("\n")
+      e.innerHTML = Prism.highlight(data, Prism.languages.javascript)
+      e.parentElement.classList.add("language-javascript")
+    })
+  </script>
+</body>
+
+</html>
+
+<!--
+  https://rxviz.com/v/NJNAbKOG
+
+const UP = 38,
+        DOWN = 40,
+        B = 66,
+        A = 65,
+        LEFT = 37,
+        RIGHT = 39,
+        _KONAMI_CODE = [UP, UP, DOWN, DOWN, LEFT, RIGHT, LEFT, RIGHT, B, A],
+				KONAMI_CODE = _KONAMI_CODE.join(":"),
+        LENGTH = _KONAMI_CODE.length;
+
+/*
+	OPTION 1
+
+
+const KONAMI$ =
+  Rx.Observable
+    .fromEvent(document, 'keydown')
+    .map((e) => e.keyCode)
+    .bufferCount(LENGTH, 1)
+    .map((e) => e.join(":"))
+    .filter((e) => e == KONAMI_CODE)
+    .mapTo(1)
+
+/*
+	OPTION 2
+*/
+
+const KONAMI$ =
+  Rx.Observable
+    .fromEvent(document, 'keydown')
+    .map((e) => e.keyCode)
+    .bufferCount(LENGTH, 1)
+    .map((e) => e.join(":"))
+    .map( (e) => e == KONAMI_CODE ? 1 : 0 )
+
+
+KONAMI$
+
+ +-->
+
+ <!-- const UP = 38,
+      DOWN = 40,
+      B = 66,
+      A = 65,
+      LEFT = 37,
+      RIGHT = 39,
+      CODE = [UP, UP, DOWN, DOWN, LEFT, RIGHT, LEFT, RIGHT, B, A].join("");
+
+function onKonamiCode(cb) {
+  let input = '';
+  document.addEventListener('keydown', function (e) {
+    input += ("" + e.keyCode);
+    if (input === CODE) {
+      return cb();
+    }
+    if (!CODE.indexOf(input)) return;
+    input = ("" + e.keyCode);
+  });
+}
+
+onKonamiCode(function () {alert('\o/')}) -->
