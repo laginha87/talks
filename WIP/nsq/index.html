@@ -71,6 +71,10 @@
     .nsq_admin {
       text-align: center;
     }
+    .topology6 img {
+      background: white;
+      width: 90%;
+    }
   </style>
 
 </head>
@@ -81,6 +85,33 @@
 class: center, middle
 
 # NSQ
+
+---
+# NSQ
+1. ### What is it?
+---
+# NSQ
+1. ### What is it?
+1. ### The Objectives
+
+---
+# NSQ
+1. ### What is it?
+1. ### The Objectives
+1. ### The Concepts
+---
+# NSQ
+1. ### What is it?
+1. ### The Objectives
+1. ### The Concepts
+1. ### The Components
+---
+# NSQ
+1. ### What is it?
+1. ### The Objectives
+1. ### The Concepts
+1. ### The Components
+1. ### Usage Examples
 
 ---
 class: center, middle
@@ -114,6 +145,38 @@ class: center, middle
 * ### Stronger message delivery guarantees
 * ### Bound the memory footprint
 * ### Simple configuration requirements
+
+---
+# The Concepts
+* ### Message
+* ### Producers & Consumers
+* ### Topics
+* ### Channels
+
+
+---
+# The Concepts - Message
+* ### Base of nsq
+* ### Get's passed around
+* ### Has some metadata
+
+---
+# The Concepts - Producer
+* ### Posts messages to nsq
+
+---
+# The Concepts - Consumer
+* ### Consumes  messages from nsq
+
+
+---
+# The Concepts - Topic
+* ### It's where messages are sent to
+
+---
+# The Concepts - Channel
+* ### It's where messages are consumed
+* ### A topic has one or more channels
 
 ---
 class: center, middle
@@ -150,7 +213,7 @@ class: center, middle
 * ### Consumers connect directly to producers
 
 ---
-# nsqlookup(Objectives)
+# nsqlookup - Objectives
 * ### Reduce SPOF
 * ### Simplify configuration
 
@@ -169,6 +232,17 @@ class: center, middle
 * ### Queues messages
 * ### Delivers messages
 
+---
+# nsqd
+* ### Receives messages
+* ### Queues messages
+* ### Delivers messages
+* ### Writes to disk
+
+---
+# nsqd - Objectives
+* ### Reduce memory footprint
+* ### Strong message guarantees
 ---
 # nsqadmin
 .nsq_admin[![alt](./nsqadmin.png)]
@@ -191,7 +265,7 @@ class: center, middle
 * # nsq_tail
 * # nsq_to_file
 * # nsq_to_nsq
-* # nsq_to_file
+* # nsq_to_http
 
 ---
 class: center, middle
@@ -219,7 +293,13 @@ class: center, middle
 
 ![alt](./topology_5.png)
 ---
+class: center, middle
+# Last Example topology
 
+.topology6[![alt](./topology_6.png)]
+---
+class: center, middle
+# FIN
     </textarea>
   <script src="https://remarkjs.com/downloads/remark-latest.min.js">
   </script>
